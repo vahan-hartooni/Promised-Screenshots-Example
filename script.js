@@ -5,6 +5,20 @@ var fs = require('fs');
 var phantomjs = require('phantomjs');
 var binPath = phantomjs.path;
 
+// List of resolutions our client would like to see
+var resolutions = [
+  {width: 1024, height: 768},
+  {width: 568, height: 320},
+  {width: 480, height: 320},
+  {width: 1152, height: 768},
+  {width: 720, height: 320},
+  {width: 960, height: 480},
+  {width: 768, height: 480},
+  {width: 960, height: 540},
+  {width: 1200, height: 960},
+  {width: 1600, height: 1200}
+];
+
 // Calling this function is the same as calling our command to
 // generate a screenshot 
 function captureWebsite(url, width, height, output) {
@@ -41,10 +55,11 @@ if(!fs.existsSync('screenshots')) {
 }
 process.chdir('screenshots');
 
-// Randomly pick ten resolutions (between 100 and 1200 pixels) and
-// take a screenshot Zombocom in that resolution
-for(var i = 0; i < 10; i++) {
-  var width = Math.random() * (1200 - 100) + 100,
-      height = Math.random() * (1200 - 100) + 100;
+for(var i = 0; i < resolutions.length; i++) {
+  var resolution = resolutions[i],
+      width = resolution.width,
+      height = resolution.height;
+  
+  // This function takes url, width, height, and the filename of the screenshot image
   captureWebsite('http://www.html5zombo.com', width, height, 'screenshot' + i + '.png');
 }
