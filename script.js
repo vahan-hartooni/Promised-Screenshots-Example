@@ -21,7 +21,7 @@ var resolutions = [
 
 // Calling this function is the same as calling our command to
 // generate a screenshot 
-function captureWebsite(url, width, height, output) {
+function captureWebsite (url, width, height, output, callback) {
   var resolution = width + 'x' + height;
 
   console.log('Capturing resolution: ' + resolution);
@@ -46,6 +46,7 @@ function captureWebsite(url, width, height, output) {
 
   produceScreenshot.on('close', function (code) {
     console.log('Finished capturing: ' + resolution + ' with exit code '+code);
+    callback();
   });
 }
 
@@ -55,11 +56,26 @@ if(!fs.existsSync('screenshots')) {
 }
 process.chdir('screenshots');
 
-for(var i = 0; i < resolutions.length; i++) {
-  var resolution = resolutions[i],
+function captureResolutions (resolutionNumber) {
+
+  // Check if we've screenshot all the resolutions
+  if(resolutionNumber >= resolutions.length) {
+    return 0;
+  }
+
+  var resolution = resolutions[resolutionNumber],
       width = resolution.width,
-      height = resolution.height;
+      height = resolution.height,
+      nextResolutionNumber = resolutionNumber + 1;
   
-  // This function takes url, width, height, and the filename of the screenshot image
-  captureWebsite('http://www.html5zombo.com', width, height, 'screenshot' + i + '.png');
+  // This function takes url, width, height, the filename of the screenshot
+  // image, and the function to call when the screenshot is done
+  captureWebsite('http://www.html5zombo.com',
+                 width,
+                 height,
+                 'screenshot' + resolutionNumber + '.png',
+                 function callNextResolution () {
+                   captureResolutions(nextResolutionNumber);
+                 });
 }
+captureResolutions(0);
