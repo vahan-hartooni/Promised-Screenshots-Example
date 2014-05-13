@@ -43,7 +43,7 @@ process.chdir('screenshots');
 
 // Randomly pick ten resolutions (between 100 and 1200 pixels) and
 // take a screenshot Zombocom in that resolution
-for(var i = 0; i < 100; i++) {
+for(var i = 0; i < 10; i++) {
   var width = Math.random() * (1200 - 100) + 100,
       height = Math.random() * (1200 - 100) + 100;
   captureWebsite('http://www.html5zombo.com', width, height, 'screenshot' + i + '.png');
