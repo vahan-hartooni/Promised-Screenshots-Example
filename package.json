@@ -1,5 +1,5 @@
 {
-  "name": "screenshot example"
+  "name": "promised-screenshot-example",
   "private": "true",
   "version": "0.0.1",
   "dependencies": {
