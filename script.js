@@ -53,3 +53,32 @@ function captureWebsite (url, width, height, output) {
   });
 }
 
+// Create a folder to save my screenshots in
+if(!fs.existsSync('screenshots')) {
+  fs.mkdirSync('screenshots');
+}
+process.chdir('screenshots');
+
+function captureResolutions (resolutionNumber) {
+
+  // Check if we've screenshot all the resolutions
+  if(resolutionNumber >= resolutions.length) {
+    return 0;
+  }
+
+  var resolution = resolutions[resolutionNumber],
+      width = resolution.width,
+      height = resolution.height,
+      nextResolutionNumber = resolutionNumber + 1;
+  
+  // This function takes url, width, height, the filename of the screenshot
+  // image
+  captureWebsite('http://www.html5zombo.com',
+                 width,
+                 height,
+                 'screenshot' + resolutionNumber + '.png')
+    .then(function callNextResolution () {
+            captureResolutions(nextResolutionNumber);
+          });
+}
+captureResolutions(0);
