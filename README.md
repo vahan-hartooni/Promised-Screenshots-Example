@@ -1,8 +1,7 @@
 Promised-Screenshots-Example
 ============================
 
-An example of using Array.reduce into a sequence of promises of screenshots
-
+An example of using Array.reduce to create a sequence of promises of screenshots
 
 Build and Run
 -------------
