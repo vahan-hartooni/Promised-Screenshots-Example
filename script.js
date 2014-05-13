@@ -57,23 +57,20 @@ var resolutions = [
   {width: 960, height: 540},
   {width: 1200, height: 960},
   {width: 1600, height: 1200}
-],
-  screenshotNumber = 0;
+];
 
-resolutions.reduce(function captureResolutions (sequence, resolution) {
+resolutions.reduce(function captureResolutions (sequence, resolution, index) {
 
   // Return my sequence of promises
   return sequence.then(function captureResolution () {
     var width = resolution.width,
         height = resolution.height;
-    
-    screenshotNumber++;
 
     // Return the individual promise
     return captureWebsite('http://www.html5zombo.com',
                           width,
                           height,
-                          'screenshot' + screenshotNumber + '.png');
+                          'screenshot' + index + '.png');
   });
 
    // Our first promise, already resolved, to start off our sequence of promises
