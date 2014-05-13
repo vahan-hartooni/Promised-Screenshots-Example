@@ -61,12 +61,13 @@ var resolutions = [
 
 resolutions.reduce(function captureResolutions (sequence, resolution, index) {
 
-  // Return my sequence of promises
-  return sequence.then(function captureResolution () {
+  // At the end of my sequence of promises, tack on my function that makes a
+  // screenshot promise after all the previous promises are resolved
+  return sequence.then(function makeAScreenshotPromise () {
     var width = resolution.width,
         height = resolution.height;
 
-    // Return the individual promise
+    // Return the promise to screenshot a website
     return captureWebsite('http://www.html5zombo.com',
                           width,
                           height,
