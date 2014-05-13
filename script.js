@@ -36,22 +36,7 @@ function captureWebsite (url, width, height, output) {
       console.log('Finished capturing: ' + resolution + ' with exit code '+code);
       resolve();
     });
-  });
-}
-
-// This has to be a separate function so that we can retain the value of i at
-// each increment of the for loop.
-function ourNextPromise (currentPromise, i) {
-  return currentPromise.then(function ourNextPromise () {
-    var resolution = resolutions[i],
-      width = resolution.width,
-      height = resolution.height;
-
-    // Once the currentPromise is fulfilled, make this next promise
-    return captureWebsite('http://www.html5zombo.com',
-                          width,
-                          height,
-                          'screenshot' + i + '.png');
+    
   });
 }
 
@@ -73,20 +58,21 @@ var resolutions = [
   {width: 960, height: 540},
   {width: 1200, height: 960},
   {width: 1600, height: 1200}
-],
-   resolution = resolutions[0],
-   width = resolution.width,
-   height = resolution.height,
-   firstPromise = captureWebsite('http://www.html5zombo.com',
-                                 width,
-                                 height,
-                                 'screenshot0.png'),
-   currentPromise = firstPromise;
+];
 
-for(var i = 1; i < resolutions.length; i++) {
-  
-  // Our current promise is fulfilling the firstPromise and all the promises
-  // that come after it up to now
-  currentPromise = ourNextPromise(currentPromise, i);
-}
+resolutions.reduce(function captureResolutions (sequence, resolution, index) {
+  // At the end of my sequence of promises, tack on my function that makes a
+  // screenshot promise after all the previous promises are resolved
+  return sequence.then(function makeAScreenshotPromise () {
+    var width = resolution.width,
+        height = resolution.height;
 
+    // Return the promise to screenshot a website
+    return captureWebsite('http://www.html5zombo.com',
+                          width,
+                          height,
+                          'screenshot' + index + '.png');
+  });
+
+   // Our first promise, already resolved, to start off our sequence of promises
+}, Promise.resolve());
