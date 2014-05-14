@@ -73,12 +73,12 @@ function captureResolutions (resolutionNumber) {
   
   // This function takes url, width, height, the filename of the screenshot
   // image
-  captureWebsite('http://www.html5zombo.com',
+  return captureWebsite('http://www.html5zombo.com',
                  width,
                  height,
                  'screenshot' + resolutionNumber + '.png')
     .then(function callNextResolution () {
-            captureResolutions(nextResolutionNumber);
+            return captureResolutions(nextResolutionNumber);
           });
 }
-captureResolutions(0);
+captureResolutions(0).then(function(data) { console.log('All resolutions screenshot: ' + data);});
