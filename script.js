@@ -63,7 +63,7 @@ function captureResolutions (resolutionNumber) {
 
   // Check if we've screenshot all the resolutions
   if(resolutionNumber >= resolutions.length) {
-    return 0;
+    return Promise.resolve();
   }
 
   var resolution = resolutions[resolutionNumber],
@@ -77,8 +77,8 @@ function captureResolutions (resolutionNumber) {
                  width,
                  height,
                  'screenshot' + resolutionNumber + '.png')
-    .then(function callNextResolution () {
+    .then(function makeAScreenshotPromise () {
             return captureResolutions(nextResolutionNumber);
           });
 }
-captureResolutions(0).then(function(data) { console.log('All resolutions screenshot: ' + data);});
+captureResolutions(0).then(function() { console.log('All resolutions screenshot');});
