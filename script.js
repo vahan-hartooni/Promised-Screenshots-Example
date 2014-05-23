@@ -68,7 +68,7 @@ var allScreenShotPromise = resolutions.reduce(function captureResolutions (seque
         height = resolution.height;
 
     // Return the promise to screenshot a website
-    return captureWebsite('http://www.html5zombo.com',
+    return captureWebsite('http://www.dundermifflin.com/',
                           width,
                           height,
                           'screenshot' + index + '.png');
