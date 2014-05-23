@@ -41,8 +41,8 @@ if(!fs.existsSync('screenshots')) {
 }
 process.chdir('screenshots');
 
-// Randomly pick ten resolutions (between 100 and 1200 pixels) and
-// take a screenshot Zombocom in that resolution
+// Randomly pick 100 resolutions (between 100 and 1200 pixels) and
+// take a screenshot Dunder Mifflin's website in that resolution
 for(var i = 0; i < 100; i++) {
   var width = Math.random() * (1200 - 100) + 100,
       height = Math.random() * (1200 - 100) + 100;
