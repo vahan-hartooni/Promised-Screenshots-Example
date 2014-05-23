@@ -53,3 +53,17 @@ function captureWebsite (url, width, height, output) {
   });
 }
 
+// Create a folder to save my screenshots in
+if(!fs.existsSync('screenshots')) {
+  fs.mkdirSync('screenshots');
+}
+process.chdir('screenshots');
+
+for(var i = 0; i < resolutions.length; i++) {
+  var resolution = resolutions[i],
+      width = resolution.width,
+      height = resolution.height;
+  
+  // This function takes url, width, height, and the filename of the screenshot image
+  captureWebsite('http://www.dundermifflin.com/', width, height, 'screenshot' + i + '.png');
+}
