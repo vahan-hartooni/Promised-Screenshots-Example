@@ -61,5 +61,5 @@ for(var i = 0; i < resolutions.length; i++) {
       height = resolution.height;
   
   // This function takes url, width, height, and the filename of the screenshot image
-  captureWebsite('http://www.html5zombo.com', width, height, 'screenshot' + i + '.png');
+  captureWebsite('http://www.dundermifflin.com/', width, height, 'screenshot' + i + '.png');
 }
