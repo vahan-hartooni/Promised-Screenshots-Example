@@ -73,7 +73,7 @@ function captureResolutions (resolutionNumber) {
   
   // This function takes url, width, height, the filename of the screenshot
   // image
-  return captureWebsite('http://www.html5zombo.com',
+  return captureWebsite('http://www.dundermifflin.com/',
                  width,
                  height,
                  'screenshot' + resolutionNumber + '.png')
