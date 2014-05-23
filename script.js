@@ -59,26 +59,13 @@ if(!fs.existsSync('screenshots')) {
 }
 process.chdir('screenshots');
 
-function captureResolutions (resolutionNumber) {
-
-  // Check if we've screenshot all the resolutions
-  if(resolutionNumber >= resolutions.length) {
-    return Promise.resolve();
-  }
-
-  var resolution = resolutions[resolutionNumber],
-      width = resolution.width,
-      height = resolution.height,
-      nextResolutionNumber = resolutionNumber + 1;
-  
-  // This function takes url, width, height, the filename of the screenshot
-  // image
-  return captureWebsite('http://www.dundermifflin.com/',
-                 width,
-                 height,
-                 'screenshot' + resolutionNumber + '.png')
-    .then(function makeAScreenshotPromise () {
-            return captureResolutions(nextResolutionNumber);
-          });
-}
-captureResolutions(0).then(function() { console.log('All resolutions screenshot');});
+captureWebsite('http://www.dundermifflin.com/',
+                 resolutions[0].width,
+                 resolutions[0].height,
+                 'screenshot' + 0 + '.png')
+.then(function makeAScreenshotPromise () {
+        return captureWebsite('http://www.dundermifflin.com/',
+                              resolutions[1].width,
+                              resolutions[1].height,
+                              'screenshot' + 1 + '.png');
+      });
