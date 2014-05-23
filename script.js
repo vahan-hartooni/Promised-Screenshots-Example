@@ -46,5 +46,5 @@ process.chdir('screenshots');
 for(var i = 0; i < 100; i++) {
   var width = Math.random() * (1200 - 100) + 100,
       height = Math.random() * (1200 - 100) + 100;
-  captureWebsite('http://www.html5zombo.com', width, height, 'screenshot' + i + '.png');
+  captureWebsite('http://www.dundermifflin.com/', width, height, 'screenshot' + i + '.png');
 }
