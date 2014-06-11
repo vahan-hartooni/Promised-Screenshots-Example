@@ -68,4 +68,10 @@ captureWebsite('http://www.dundermifflin.com/',
                               resolutions[1].width,
                               resolutions[1].height,
                               'screenshot' + 1 + '.png');
+      })
+.then(function makeAScreenshotPromise () {
+        return captureWebsite('http://www.dundermifflin.com/',
+                              resolutions[2].width,
+                              resolutions[2].height,
+                              'screenshot' + 2 + '.png');
       });
