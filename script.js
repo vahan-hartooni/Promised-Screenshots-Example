@@ -60,7 +60,7 @@ var resolutions = [
   {width: 1600, height: 1200}
 ];
 
-var allScreenShotPromise = resolutions.reduce(function captureResolutions (sequence, resolution, index) {
+var allScreenShotPromise = resolutions.reduce(function chainScreenshotPromiseForResolution (sequence, resolution, index) {
   // At the end of my sequence of promises, tack on my function that makes a
   // screenshot promise after all the previous promises are resolved
   return sequence.then(function makeAScreenshotPromise () {
