@@ -60,10 +60,11 @@ var resolutions = [
   {width: 1600, height: 1200}
 ];
 
-var allScreenShotPromise = resolutions.reduce(function chainAScreenshotPromise (sequence, resolution, index) {
-  // At the end of my sequence of promises, tack on my function that makes a
+var allScreenShotPromise = resolutions.reduce(function chainAScreenshotPromise (promiseChain, resolution, index) {
+  
+  // At the end of my chain of promises, tack on my function that makes a
   // screenshot promise after all the previous promises are resolved
-  return sequence.then(function makeAScreenshotPromise () {
+  return promiseChain.then(function makeAScreenshotPromise () {
 
     // Return the promise to screenshot a website
     return captureWebsite('http://www.dundermifflin.com/',
@@ -72,7 +73,7 @@ var allScreenShotPromise = resolutions.reduce(function chainAScreenshotPromise (
                           'screenshot' + index + '.png');
   });
 
-   // Our first promise, already resolved, to start off our sequence of promises
+   // Our first promise, already resolved, to start off our chain of promises
 }, Promise.resolve());
 
 allScreenShotPromise.then(function() { console.log('All resolutions screenshot');});
